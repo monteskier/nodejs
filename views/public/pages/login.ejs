@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <% include ../partials/head %>
+</head>
+</head>
+
+<body>
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+
+            <h1>Medalla de Sant Vicenç 2017 </h1>
+            <p>A continuació podreu veure tots els aspirants a la medalla d'aquest any:</p>
+        </div>
+        <form action="" method="POST" id="login">
+          <table>
+            <tr>
+              <td>Usuari:</td><td><input type="text" name="user"/></td>
+            </tr>
+            <tr>
+              <td>Contrasenya:</td><td><input type="text" name="password"></td>
+            </tr>
+            <tr>
+              <td colspan="2" align="center"><input type="submit" value="Validar"></td>
+            </tr>
+          </table>
+        </form>
+    </main>
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+<%include ../partials/scripts %>
+<script>
+  $(document).ready(function(){
+    var user, pass;
+    $("#login").on('submit',function(e){
+      e.stopPropagation();
+      e.prevenDefault();
+      user = $("#user").val();
+      pass = $("#pass").val();
+      $.post("/login",{user:user,pass:pass},function(data){
+        if(data==done){
+          //window.location.href="admin";
+          console.log("logat be");
+        }
+      });
+    });
+  });
+</script>
+
+
+</html>

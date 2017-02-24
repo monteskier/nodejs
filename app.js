@@ -5,18 +5,32 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+//Routes of app
 var index = require('./routes/index');
-var users = require('./routes/users');
+var login = require('./routes/login');
 var votar = require('./routes/votar');
+var about = require('./routes/about');
+var admin = require('./routes/admin');
 //Apis de MongoDB
 var monk = require('monk');
 var mongo = require('mongodb');
 var db = monk("localhost:27017/medalla");
+if(!db){
+  console.log('no connection to Mongo db');
+}
+db.then(() => {
+  console.log('Connected correctly to server');
+});
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views','pages'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -31,14 +45,12 @@ app.use(session({
 }));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/login', login);
 app.use('/votar', votar);
+app.use('/about',about);
+app.use('/admin',admin);
 
-//Make our db accessible to our router
-app.use(function(req,res,next){
-    req.db = db;
-    next();
-});
+//MAke our db accessible to
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -57,7 +69,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//Start server at port 3000
-//conect with mongodb
 
 module.exports = app;

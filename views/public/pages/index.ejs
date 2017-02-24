@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <% include ../partials/head %>
+</head>
+</head>
+
+<body>
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+
+            <h1>Medalla de Sant Vicenç 2017 </h1>
+            <p>A continuació podreu veure tots els aspirants a la medalla d'aquest any:</p>
+        </div>
+        <div id="flex-cont">
+          <div class="indexCol"></div>
+            <h2>Aspirants:</h2>
+            <ul>
+              <% aspirants.forEach(function(aspirant) { %>
+                <li>
+                    <%= aspirant.nom %>
+                </li>
+              <% }); %>
+            </ul>
+          </div>
+        </div>
+
+    </main>
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+<%include ../partials/scripts %>
+
+</html>

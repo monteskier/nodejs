@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var db = req.db;
-  var collection= db.get("aspirants");
+  const collection = db.get('aspirants');
+  console.log("Antes de la funcion");
   collection.find({},{},function(err, docs){
     if(err) console.log(err);
-    res.render('index', { aspirants: docs });
+    res.render('public/pages/index', { 'aspirants': docs });
   });
 
 });
