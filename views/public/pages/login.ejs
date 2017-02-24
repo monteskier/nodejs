@@ -45,10 +45,9 @@
       e.prevenDefault();
       user = $("#user").val();
       pass = $("#pass").val();
-      $.post("/login",{user:user,pass:pass},function(data){
-        if(data==done){
-          //window.location.href="admin";
-          console.log("logat be");
+      $.post("login",{user:user,pass:pass},function(data){
+        if(data=="done"){
+          window.location.href="/admin"
         }
       });
     });
