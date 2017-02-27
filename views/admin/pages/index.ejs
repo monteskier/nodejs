@@ -21,7 +21,7 @@
         <div id="flex-cont">
           <ul>
           <% aspirants.forEach(function(aspirant) { %>
-            <li><%= aspirant.nom %> <button type="button" class="btn btn-danger" value="<%= aspirant._id %>">Eliminar</button></li>
+            <li><%= aspirant.nom %> <button id="btnRmv" type="button" class="btn btn-danger" name="obj" value="<%= aspirant._id %>">Eliminar</button></li>
             <% }); %>
           </ul>
         </div>
@@ -33,5 +33,17 @@
 
 </body>
 <%include ../partials/scripts %>
+<script>
+  $("#btnRmv").on('click', function(e){
+    console.log("polsat");
+    $.ajax({
+      data:{"obj":$(this).val()},
+      url:"admin/removeAspirant",
+      method:"post"
+    }).done(function(data){
+      alert(data);
+    });
+  });
+</script>
 
 </html>

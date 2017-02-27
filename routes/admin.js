@@ -46,4 +46,12 @@ router.post('/insertAspirant',function(req, res, next){
   });
 
 });
+router.post('/removeAspirant',function(req, res, next){
+  var db = req.db;
+  var collection = db.get('aspirants');
+  collection.remove({"_id":req.body.obj},function(err,doc){
+    if(err) res.end("Error en eliminar el objecte");
+    res.end("S'ha eliminat correctament");
+  });
+});
 module.exports = router;
