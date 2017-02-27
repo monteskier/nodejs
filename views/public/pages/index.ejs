@@ -39,10 +39,13 @@
     <img src="<%= aspirant.foto %>" width=100 height=100 class="pull-left img-responsive thumb margin10 img-thumbnail">
 
         <em><a href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation" target="_blank">Votar!</a></em>
-    <article><p>
+    <article><p align="justify">
         <%= aspirant.text %>
         </p></article>
-    <a class="btn btn-blog pull-right marginBottom10" href="http://bootsnipp.com/user/snippets/2RoQ">LLEGEIX MÈS</a>
+        <div class="more" name="<%=aspirant.nom %>"><p align="justify"><%= aspirant.body %></p></div>
+        <button type="button" class="btn btn-lg btn-primary">Vota!</button>
+
+    <a class="btn btn-blog pull-right marginBottom10" id="btn_more" data-punter="<%=aspirant.nom%>">[ ... ]</a>
     </div>
 
       <% }); %>
@@ -54,5 +57,14 @@
 
 </body>
 <%include ../partials/scripts %>
-
+<script>
+  $(document).ready(function(){
+    $(".more").hide();
+    $("#btn_more").click(function(e){
+      var punter = $(this).data('punter');
+      console.log(punter);
+      $("div[name='"+punter+"']").toggle(500);
+    });
+  });
+</script>
 </html>
