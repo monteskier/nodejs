@@ -17,10 +17,13 @@
             <h1>Medalla de Sant Vicenç 2017 </h1>
             <p>Estàs el AdminSite</p>
         </div>
+        <p>Llista d'Aspirants:</p>
         <div id="flex-cont">
-          <div class="indexCol"></div>
-            
-          </div>
+          <ul>
+          <% aspirants.forEach(function(aspirant) { %>
+            <li><%= aspirant.nom %> <button type="button" class="btn btn-danger" value="<%= aspirant._id %>">Eliminar</button></li>
+            <% }); %>
+          </ul>
         </div>
 
     </main>

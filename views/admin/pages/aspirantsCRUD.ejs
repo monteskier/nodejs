@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <% include ../partials/head %>
+</head>
+</head>
+
+<body>
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+          <form action="insertAspirant" method="POST" encType="multipart/form-data" id="form">
+            <table>
+              <tr>
+                <td>Nom i Cognoms:</td><td><input type="text" name="nom" id="nom"></td>
+                <td>Foto:</td><td><input type="file" id="file-input" name="sampleFile"/></td><td id="img_container"></td>
+              </tr>
+              <tr>
+                <td>Descripció:</td><td><textarea cols="50" rows="5" name="text" id="text"></textarea></td>
+              </tr>
+              <tr>
+                <td>Cos:</td><td><textarea cols="50" rows="7" id="textarea" name="body"></textarea></td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center"><input type="submit" value="Desar"/></td>
+
+              </tr>
+            </table>
+          </form>
+        </div>
+    </main>
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+</body>
+<%include ../partials/scripts %>
+
+<script>
+  function renderImage(file){
+    var reader = new FileReader();
+    reader.onload = function(event){
+      the_url = event.target.result
+      $("#img_container").html("<img src='"+ the_url +"' width=100 height=100 />'");
+    }
+    reader.readAsDataURL(file);
+  }
+
+  $(document).ready(function(){
+    $("#file-input").change(function(){
+      console.log(this.files);
+      renderImage(this.files[0]);
+    });
+  });
+
+</script>
+
+</html>

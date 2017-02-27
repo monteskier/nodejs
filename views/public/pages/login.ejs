@@ -23,7 +23,7 @@
               <td>Usuari:</td><td><input type="text" name="user"/></td>
             </tr>
             <tr>
-              <td>Contrasenya:</td><td><input type="text" name="password"></td>
+              <td>Contrasenya:</td><td><input type="text" name="pass"></td>
             </tr>
             <tr>
               <td colspan="2" align="center"><input type="submit" value="Validar"></td>
@@ -46,9 +46,6 @@
       user = $("#user").val();
       pass = $("#pass").val();
       $.post("login",{user:user,pass:pass},function(data){
-        if(data=="done"){
-          window.location.href="/admin"
-        }
       });
     });
   });

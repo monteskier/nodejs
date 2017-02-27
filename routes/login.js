@@ -10,10 +10,11 @@ router.post('/',function(req, res, next){
   var collection = db.get('users');
   var user = req.body.user;
   var pass = req.body.pass;
-  collection.findOne({'user':user,'pass':pass},function(err,doc){
+  collection.findOne({'user':user,'pass':pass},{},function(err,doc){
     if(err) res.send("error amb la consulta");
     if(doc.user == user && doc.pass == pass){
-      res.send("done");
+      req.session.user = user;
+      res.redirect('/admin');
     }else{
       res.send("Usuari o contrasenya incorrectes");
     }
