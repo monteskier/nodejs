@@ -41,7 +41,7 @@ router.post('/insertAspirant',function(req, res, next){
       if(err){
         return res.status(500).send(err);
       }
-      res.redirect('/');
+      res.redirect('/admin');
     });
   });
 

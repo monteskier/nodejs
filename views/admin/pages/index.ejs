@@ -12,20 +12,31 @@
     </header>
 
     <main>
-        <div class="jumbotron">
 
+        <div class="jumbotron">
+        <div id="container">
             <h1>Medalla de Sant Vicenç 2017 </h1>
             <p>Estàs el AdminSite</p>
         </div>
-        <p>Llista d'Aspirants:</p>
-        <div id="flex-cont">
-          <ul>
+      </div>
+        <div class="floats">
+        <table class="aspirants">
+          <tr class="title1">
+            <td colspan="3">Llista d'aspirants a la medalla</td>
+          </tr>
+          <tr class="title2">
+            <td>Nom i Cognoms:</td><td>Vots:</td><td>Operació:</td>
+          </tr>
           <% aspirants.forEach(function(aspirant) { %>
-            <li><%= aspirant.nom %> <button id="btnRmv" type="button" class="btn btn-danger" name="obj" value="<%= aspirant._id %>">Eliminar</button></li>
+            <tr>
+              <td><%= aspirant.nom %></td>
+              <td><%= aspirant.vots %></td>
+              <td><button id="btnRmv" type="button" class="btn btn-danger" name="obj" value="<%= aspirant._id %>">Eliminar</button></td>
+            </tr>
             <% }); %>
-          </ul>
+          </table>
         </div>
-
+        <div class="floats" id="chart_div"></div>
     </main>
     <footer>
         <% include ../partials/footer %>
@@ -45,5 +56,38 @@
     });
   });
 </script>
+<script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          <% aspirants.forEach(function(aspirant) { %>
+          ['<%=aspirant.nom %>', <%=aspirant.vots %>],
+         <% }); %>
+        ]);
+
+        // Set chart options
+        var options = {'title':'Estadistiques en temps real:',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
 
 </html>

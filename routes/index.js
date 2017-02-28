@@ -9,6 +9,25 @@ router.get('/', function(req, res, next) {
     if(err) console.log(err);
     res.render('public/pages/index', { 'aspirants': docs });
   });
-
+});
+  router.post('/votar', function(req, res, next){
+    var dni = req.body.dni;
+    var aspirant_id = req.body.aspirant_id;
+    var db = req.db;
+    var collection = db.get('dni');
+    collection.findOne({"dni":dni},function(err,doc){
+      if(err) res.json({"msg":"Error en la consulta"});
+      if(doc){
+        res.json({"msg":"Aquest ciutada ja ha efectuat una votació anteriorment"});
+      }
+      collection.insert({"dni":dni},function(err,doc){
+        if(err) res.json({"msg":"Error en inserir un nou dni"});
+        collection2 = db.get("aspirants");
+        collection2.update({"_id":aspirant_id},{$inc:{vots: +1}},function(err,doc){
+          if(err) res.json({"msg":"Error al dessar el vot"});
+          res.json({"msg":"Vot efectuat correctament"});
+        });
+      });
+    });
 });
 module.exports = router;
