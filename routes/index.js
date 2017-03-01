@@ -15,19 +15,37 @@ router.get('/', function(req, res, next) {
     var aspirant_id = req.body.aspirant_id;
     var db = req.db;
     var collection = db.get('dni');
-    collection.findOne({"dni":dni},function(err,doc){
-      if(err) res.json({"msg":"Error en la consulta"});
-      if(doc){
-        res.json({"msg":"Aquest ciutada ja ha efectuat una votació anteriorment"});
+    var exp_Reg = /^\d{8}[a-zA-Z]$/;
+    var numero;
+    if(exp_Reg.test(dni) == true){
+      numero = dni.substr(0, dni.length-1,1);
+      letr = dni.substr(dni.length-1,1);
+      numero = numero % 23;
+      letra = "TRWAGMYFPDXBNJZSQVHLCKET";
+      letra = letra.substring(numero, numero+1);
+        if (letra!=letr.toUpperCase()) {
+          res.json({'msg':'Dni erroni, la letra del NIF no correspon'});
+        }else{
+          collection.findOne({"dni":dni},function(err,doc){
+            if(err) res.json({"msg":"Error en la consulta"});
+            if(doc){
+              res.json({"msg":"Aquest ciutada ja ha efectuat una votació anteriorment"});
+            }
+            collection.insert({"dni":dni},function(err,doc){
+              if(err) res.json({"msg":"Error en inserir un nou dni"});
+              collection2 = db.get("aspirants");
+              collection2.update({"_id":aspirant_id},{$inc:{vots: +1}},function(err,doc){
+                if(err) res.json({"msg":"Error al dessar el vot"});
+                res.json({"msg":"Vot efectuat correctament"});
+              });
+            });
+          });
+
+        }
+      }else{
+        res.json({"msg":"Dni erroni, format no valid"});
       }
-      collection.insert({"dni":dni},function(err,doc){
-        if(err) res.json({"msg":"Error en inserir un nou dni"});
-        collection2 = db.get("aspirants");
-        collection2.update({"_id":aspirant_id},{$inc:{vots: +1}},function(err,doc){
-          if(err) res.json({"msg":"Error al dessar el vot"});
-          res.json({"msg":"Vot efectuat correctament"});
-        });
-      });
-    });
+
+
 });
 module.exports = router;

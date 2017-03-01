@@ -16,8 +16,10 @@
 
             <h1>Medalla de Sant Vicenç 2017 </h1>
             <p>A continuació podreu veure tots els aspirants a la medalla d'aquest any:</p>
+
         </div>
         <div id="container">
+          <div id='msgAjax'>MSG</div>
             <% aspirants.forEach(function(aspirant) { %>
                 <div class="col-md-10 blogShort">
 
@@ -42,6 +44,7 @@
 
                 <% }); %>
         </div>
+
     </main>
     <footer>
         <% include ../partials/footer %>
@@ -58,11 +61,22 @@
           data:{"dni":dni,"aspirant_id":aspirant_id},
           type:"post",
           success:function(data){
-            alert(data.msg);
+
+            $("#msgAjax").empty();
+            $("#msgAjax").append(data.msg);
+            $("#msgAjax").show();
+            $("#msgAjax").animate({
+                                    opacity: 1,
+                                  },1500,function(){
+                                    $("#msgAjax").animate({
+                                                            opacity: 0,
+                                                          },1500)
+                                                        });
+                                  }
+                                  });
           }
 
-      });
-      }
+
       function createDniWindow(id){
 
         var dniWindow = "<div id='dniWindow'>"
@@ -75,6 +89,7 @@
       return dniWindow;
       }
         $(document).ready(function() {
+            $("#msgAjax").hide();
             $(".more").hide();
             $(".btn_more").on('click',function(e) {
 
@@ -89,22 +104,7 @@
               var win = createDniWindow($(this).val());
               $(this).after(win);
             });
-            $("#formVota").submit(function(e){
-              e.preventDefault();
-              e.stopPropagation();
-              alert("yhea");
-              var dni = $("input[name='dni']").val();
-              var aspirant_id = $("input[name='aspirant_id']").val();
-              $.ajax({
-                url:"/votar",
-                data:{"dni":dni,"aspirant_id":aspirant_id},
-                type:"post",
-                success:function(data){
-                  alert(data.msg);
-                }
 
-            });
-        });
       });
     </script>
 
