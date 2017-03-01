@@ -14,6 +14,12 @@ main{
 #container{
   padding:10px;
 }
+#banner{
+  padding:10px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+}
 table.aspirants  tr.title1  td{
   text-align:right;
   font-size:22px;

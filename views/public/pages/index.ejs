@@ -13,15 +13,16 @@
 
     <main>
         <div class="jumbotron">
-
+            <div id="banner">
             <h1>Medalla de Sant Vicenç 2017 </h1>
-            <p>A continuació podreu veure tots els aspirants a la medalla d'aquest any:</p>
-
+            <img src="/logos/medalla.svg" width="100" height="100"/>
+          </div>
         </div>
+          <p>A continuació podreu veure tots els aspirants a la medalla d'aquest any:</p>
         <div id="container">
           <div id='msgAjax'>MSG</div>
             <% aspirants.forEach(function(aspirant) { %>
-                <div class="col-md-10 blogShort">
+                <!--<div class="col-md-10 blogShort">-->
 
                     <h1><%= aspirant.nom %></h1>
                     <img src="<%= aspirant.foto %>" width=100 height=100 class="pull-left img-responsive thumb margin10 img-thumbnail">
@@ -40,7 +41,7 @@
                     <button type="button" id="btnVota" value="<%= aspirant._id %>" class="btn btn-lg btn-primary btnVota">Vota!</button>
 
                     <a class="btn btn-blog pull-right marginBottom10 btn_more" data-punter="<%=aspirant.nom%>">[ ... ]</a>
-                </div>
+                <!--</div>-->
 
                 <% }); %>
         </div>
@@ -67,10 +68,10 @@
             $("#msgAjax").show();
             $("#msgAjax").animate({
                                     opacity: 1,
-                                  },1500,function(){
+                                  },3000,function(){
                                     $("#msgAjax").animate({
                                                             opacity: 0,
-                                                          },1500)
+                                                          },3000)
                                                         });
                                   }
                                   });
