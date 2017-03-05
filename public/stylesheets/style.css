@@ -94,3 +94,13 @@ table.aspirants  tr.title2  td{
   50% {background-color:#4CAF50; color:white}
   100% {background-color:"white"; color:whit
 }
+/**
+@media only screen screen and (max-width: 480px){
+.img-thumbnail{
+  background-size: 200px 200px;
+}
+.btnVota{
+  background-size: 200px, 200px;
+}
+
+}*/
