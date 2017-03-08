@@ -98,12 +98,14 @@
                 //console.log(punter);
                 $("div[name='" + punter + "']").toggle(500);
             });
-            $(".btnVota").click(function(e){
+            $(".btnVota").mouseover(function(e){
               if($("#dniWindow")){
                 $("#dniWindow").remove();
               }
               var win = createDniWindow($(this).val());
               $(this).after(win);
+              $("#dniWindow").hide();
+              $("#dniWindow").show(500);
             });
 
       });
