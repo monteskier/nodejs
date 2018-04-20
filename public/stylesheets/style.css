@@ -104,6 +104,9 @@ table.aspirants  tr.title2  td{
 }
 
 @media only screen and (max-width: 480px){
+  nav{
+    display: none;
+  }
 .container-fluid{
   display: none;
 }
