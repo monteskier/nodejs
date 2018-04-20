@@ -95,20 +95,17 @@ table.aspirants  tr.title2  td{
 @keyframes ajaxResponse{
   0% {background-color:"white"; color:white}
   50% {background-color:#4CAF50; color:white}
-  100% {background-color:"white"; color:whit
+  100% {background-color:"white"; color:white}
 }
 @-moz-keyframes ajaxResponse{
   0% {background-color:"white"; color:white}
   50% {background-color:#4CAF50; color:white}
-  100% {background-color:"white"; color:whit
-}
-/**
-@media only screen screen and (max-width: 480px){
-.img-thumbnail{
-  background-size: 200px 200px;
-}
-.btnVota{
-  background-size: 200px, 200px;
+  100% {background-color:"white"; color:white}
 }
 
-}*/
+@media only screen screen and (max-width: 480px){
+.container-fluid{
+  display: none;
+}
+
+}
