@@ -5,7 +5,7 @@ router.get('/', function(req, res, next) {
   var db = req.db;
   const collection = db.get('aspirants');
   console.log("Antes de la funcion");
-  collection.find({},{},function(err, docs){
+  collection.find({},{sort:{"ord": -1}},function(err, docs){
     if(err) console.log(err);
     res.render('public/pages/index', { 'aspirants': docs });
   });
