@@ -25,10 +25,10 @@ router.post('/insertAspirant',function(req, res, next){
   }
   var db = req.db;
   var collection = db.get('aspirants');
-
+  var ord = parseInt(req.body.ord);
   collection.insert({
     "nom":req.body.nom,
-    "ord":parseInt(req.body.ord),
+    "ord":ord,
     "text":req.body.text,
     "foto":'/images/'+req.body.nom+'.jpg',
     "body": req.body.body,
