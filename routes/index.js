@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
             if(err) res.json({"msg":"Error en la consulta"});
             if(doc){
               res.json({"msg":"Aquest ciutada ja ha efectuat una votació anteriorment"});
-            }
+            }else{
             collection.insert({"dni":dni},function(err,doc){
               if(err) res.json({"msg":"Error en inserir un nou dni"});
               collection2 = db.get("aspirants");
@@ -39,6 +39,7 @@ router.get('/', function(req, res, next) {
                 res.json({"msg":"Vot efectuat correctament"});
               });
             });
+          }
           });
 
         }

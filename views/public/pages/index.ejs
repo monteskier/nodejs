@@ -58,6 +58,9 @@
       function sendAjax(){
         var dni = $("input[name='dni']").val();
         var aspirant_id = $("input[name='aspirant_id']").val();
+        $("#btnVota").prop("disabled",true);
+        $('#votar_float').prop("disabled", true);
+
         $.ajax({
           url:"/votar",
           data:{"dni":dni,"aspirant_id":aspirant_id},
@@ -85,7 +88,7 @@
                       +"<form method='post' action='/votar' id='formVota'>"
                       +"<p> D.N.I/N.I.E : <input type='text' title='123456789X o X123456789' name='dni' pattern='(([X-Z]{1})([-]?)(\\d{7})([-]?)([A-Z]{1}))|((\\d{8})([-]?)([A-Z]{1}))' /></p>"
                       +"<input type='hidden' name='aspirant_id' value='"+id+"'/>"
-                      +"<p><input type='button' class='btn btn-primary' value='Votar' onclick='sendAjax()' /></p>"
+                      +"<p><input type='button' class='btn btn-primary' id='votar_float' value='Votar' onclick='sendAjax()' /></p>"
                       +"</form>"
                       +"</div>";
       return dniWindow;
