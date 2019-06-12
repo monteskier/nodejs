@@ -48,7 +48,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', index);
+app.use('/', index);//es pot canviar per enviar a una altre pagina
 app.use('/login', login);
 app.use('/votar', votar);
 app.use('/about',about);
