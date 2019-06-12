@@ -12,6 +12,15 @@ router.get('/', function(req, res, next) {
     });
   }
 });
+router.get('/votar', function(req, res, next) {
+  var db = req.db;
+  const collection = db.get('aspirants');
+  console.log("Antes de la funcion");
+  collection.find({},{sort:{"ord": 1}},function(err, docs){
+    if(err) console.log(err);
+    res.render('admin/pages/votar', { 'aspirants': docs });
+  });
+});
 router.get('/aspirantsCRUD', function(req, res, next){
   if(req.session.user){
     res.render('admin/pages/aspirantsCRUD');//Falta enviar la liasta con todos los usuarios
